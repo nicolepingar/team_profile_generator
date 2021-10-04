@@ -1,9 +1,11 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const html = require('./src')
+const generateHTML = require('./src/html');
+const Employee = require("./lib/employee")
 const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require("./lib/engineer");
+const emptyArray = [];
 
 const managerQuestions = [
     {
@@ -23,7 +25,7 @@ const managerQuestions = [
     },
     {
         type: 'input',
-        name: 'email',
+        name: 'office',
         message: "What is the manager's office number?",
     },
     {
@@ -81,7 +83,7 @@ const internQuestions = [
     },
     {
         type: 'input',
-        name: 'github',
+        name: 'school',
         message: "What is the intern's school??",
     },
     {
@@ -97,41 +99,73 @@ function writeToFile(fileName, response) {
     err ? console.error(err) : console.log("Generating your team profile...")
     )
 }
+function endQuestions(emptyArray) {
+    
+    writeToFile("./dist/index.html", generateHTML(emptyArray))
+}
 
 function init() {
     console.log("Please build your team.");
     inquirer
         .prompt(managerQuestions)
         .then((response) => {
+            const { name, id, email, office } = response
+            const manager = new Manager (name, id, email, office);
+            emptyArray.push(manager);
+
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else writeToFile("index.html", response)
+            } else 
+            endQuestions()
         })
+        // .then(response => {
+        //     const { name, id, email, office } = response
+        //     const manager = new Manager (name, id, email, office);
+        //     emptyArray.push(manager);
+        // })
 }
 function engineer() {
     inquirer
         .prompt(engineerQuestions)
         .then((response) => {
+            const { name, id, email, github } = response
+            const engineer = new Engineer (name, id, email, github)
+            emptyArray.push(engineer);
+
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else writeToFile("index.html",response)
-        }
-        )
+            } else endQuestions()
+        })
+        // .then(response => {
+        //     const { name, id, email, github } = response
+        //     const engineer = new Engineer (name, id, email, github)
+        //     emptyArray.push(engineer);
+        // })
+
 }
 function intern() {
     inquirer
         .prompt(internQuestions)
         .then((response) => {
+            const { name, id, email, school } = response
+            const intern = new Intern (name, id, email, school)
+            emptyArray.push(intern)
+
+
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else writeToFile("index.html", response)
-        }
-        )
+            } else endQuestions()
+        })
+        // .then(response => {
+        //     const { name, id, email, school } = response
+        //     const intern = new Intern (name, id, email, school)
+        //     emptyArray.push(intern)
+        // })
 }
 init();
