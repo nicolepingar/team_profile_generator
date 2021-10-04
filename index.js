@@ -1,5 +1,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const html = require('./src')
+const Manager = require('./lib/manager');
+const Intern = require('./lib/intern');
+const Engineer = require("./lib/engineer");
 
 const managerQuestions = [
     {
@@ -26,7 +30,7 @@ const managerQuestions = [
         type: 'list',
         name: 'new',
         message: "Which type of team member would you like to add?",
-        options: ["Engineer", "Intern", "I dont want to add any more team members."]
+        choices: ["Engineer", "Intern", "I dont want to add any more team members."]
     }
 ]
 const engineerQuestions = [
@@ -55,7 +59,7 @@ const engineerQuestions = [
         type: 'list',
         name: 'new',
         message: "Which type of team member would you like to add?",
-        options: ["Engineer", "Intern", "I dont want to add any more team members."]
+        choices: ["Engineer", "Intern", "I dont want to add any more team members."]
     }
 ]
 const internQuestions = [
@@ -84,30 +88,50 @@ const internQuestions = [
         type: 'list',
         name: 'new',
         message: "Which type of team member would you like to add?",
-        options: ["Engineer", "Intern", "I dont want to add any more team members."]
+        choices: ["Engineer", "Intern", "I dont want to add any more team members."]
     }
 ]
 
+function writeToFile(fileName, response) {
+    fs.writeFile(fileName, response, (err) =>
+    err ? console.error(err) : console.log("Generating your team profile...")
+    )
+}
 
-
-
-
-
-
-
-
-
-// function Employee(name, id, email) {
-//     this.fullName = name;
-//     this.idNum = id
-//     this.email = email
-//     this.getName()
-//     this.getID()
-//     this.getEmail()
-//     this.getRoll()
-// }
-
-// node index.js
-//please build your team 
-// manager questions
-// Which type of team member would you like to add? (engineer, intern, i dont want to add any more team members )
+function init() {
+    console.log("Please build your team.");
+    inquirer
+        .prompt(managerQuestions)
+        .then((response) => {
+            if (response.new === "Engineer") {
+                engineer();
+            } else if (response.new === "Intern") {
+                intern();
+            } else writeToFile("index.html", response)
+        })
+}
+function engineer() {
+    inquirer
+        .prompt(engineerQuestions)
+        .then((response) => {
+            if (response.new === "Engineer") {
+                engineer();
+            } else if (response.new === "Intern") {
+                intern();
+            } else writeToFile("index.html",response)
+        }
+        )
+}
+function intern() {
+    inquirer
+        .prompt(internQuestions)
+        .then((response) => {
+            if (response.new === "Engineer") {
+                engineer();
+            } else if (response.new === "Intern") {
+                intern();
+            } else writeToFile("index.html", response)
+        }
+        )
+}
+init();
