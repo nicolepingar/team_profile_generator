@@ -1,3 +1,4 @@
+// required files 
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateHTML = require('./src/html.js');
@@ -6,7 +7,7 @@ const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require("./lib/engineer");
 const emptyArray = [];
-
+// manager questions, engineer questions and intern questions
 const managerQuestions = [
     {
         type: 'input',
@@ -80,7 +81,6 @@ const engineerQuestions = [
                 return false;
             }
         }
-
     },
     {
         type: 'input',
@@ -141,7 +141,6 @@ const internQuestions = [
                 return false;
             }
         }
-
     },
     {
         type: 'input',
@@ -212,7 +211,7 @@ function init() {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else {endQuestions()}
+            } else {endQuestions(emptyArray)}
             
         })
     
@@ -229,7 +228,7 @@ function engineer() {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else {endQuestions()}
+            } else {endQuestions(emptyArray)}
         })
       
 
@@ -247,7 +246,7 @@ function intern() {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else {endQuestions()}
+            } else {endQuestions(emptyArray)}
         })
 }
 init();

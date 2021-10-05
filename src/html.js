@@ -3,7 +3,7 @@ const generateManager = function (manager) {
     <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${manager.name}</h5>
-    <p class="card-text">${manager.getRoll()}</p>
+    <p class="card-text">${manager.getRole()}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${manager.id}</li>
@@ -19,7 +19,7 @@ const generateEngineer = function (engineer) {
     <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${engineer.name}</h5>
-    <p class="card-text">${engineer.getRoll()}</p>
+    <p class="card-text">${engineer.getRole()}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${engineer.id}</li>
@@ -35,7 +35,7 @@ const generateIntern = function (intern) {
     <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${intern.name}</h5>
-    <p class="card-text">${intern.getRoll()}</p>
+    <p class="card-text">${intern.getRole()}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${intern.id}</li>
@@ -46,22 +46,25 @@ const generateIntern = function (intern) {
     `
 }
 
-generateHTML = function (manager, engineer, intern) {
+const generateHTML = function (employeeArray) {
     cardArray = [];
+    console.log(employeeArray);
+    for (let i = 0; i < employeeArray.length; i++) {
+        const employee = employeeArray[i];
 
-    if (manager.role === "Manager") {
-        const managerCard = generateManager();
-        cardArray.push(managerCard);
+        if (employee.role === "Manager") {
+            const managerCard = generateManager(employee);
+            cardArray.push(managerCard);
+        }
+        if (employee.role === "Engineer") {
+            const engineerCard = generateEngineer(employee);
+            cardArray.push(engineerCard)
+        }
+        if (employee.role === "Intern") {
+            const internCard = generateIntern(employee);
+            cardArray.push(internCard)
+        }
     }
-    if (engineer.role === "Engineer") {
-        const engineerCard = generateEngineer();
-        cardArray.push(engineerCard)
-    }
-    if (intern.role === "Intern") {
-        const internCard = generateIntern();
-        cardArray.push(internCard)
-    }
-
     const teamCards = cardArray.join("")
     const generateAll = bodyHTML(teamCards)
     return generateAll;
