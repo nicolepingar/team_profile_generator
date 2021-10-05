@@ -1,5 +1,6 @@
 const generateManager = function (manager) {
     return `
+    <div class="col">
     <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${manager.name}</h5>
@@ -11,11 +12,13 @@ const generateManager = function (manager) {
     <li class="list-group-item">Office Number: ${manager.office}</li>
   </ul>
 </div>
+</div>
     `
 }
 
 const generateEngineer = function (engineer) {
     return `
+    <div class="col">
     <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${engineer.name}</h5>
@@ -27,11 +30,13 @@ const generateEngineer = function (engineer) {
     <li class="list-group-item">Office Number: ${engineer.github}</li>
   </ul>
 </div>
+</div>
     `
 }
 
 const generateIntern = function (intern) {
     return `
+    <div class="col">
     <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${intern.name}</h5>
@@ -43,12 +48,12 @@ const generateIntern = function (intern) {
     <li class="list-group-item">Office Number: ${intern.school}</li>
   </ul>
 </div>
+</div>
     `
 }
 
 const generateHTML = function (employeeArray) {
     cardArray = [];
-    console.log(employeeArray);
     for (let i = 0; i < employeeArray.length; i++) {
         const employee = employeeArray[i];
 
@@ -94,7 +99,13 @@ const bodyHTML = function (teamCards) {
 </nav>
 
 <main>
+<div class="container">
+  <div class="row justify-content-center">
+   
 ${teamCards}
+
+</div>
+</div>
 </main>
 
 </body>
