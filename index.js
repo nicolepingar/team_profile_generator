@@ -1,7 +1,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateHTML = require('./src/html');
-const Employee = require("./lib/employee")
+const generateHTML = require('./src/html.js');
+const Employee = require('./lib/employee')
 const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require("./lib/engineer");
@@ -12,21 +12,53 @@ const managerQuestions = [
         type: 'input',
         name: 'name',
         message: "What is the manager's name?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter a name.");
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'id',
         message: "What is the manager's employee ID?",
+        validate: input => {
+            if (isNaN(input) || !input) {
+                console.log ("Please enter an ID number.");
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'input',
         name: 'email',
         message: "What is the manager's email?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter an email.");
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'office',
         message: "What is the manager's office number?",
+        validate: input => {
+            if (isNaN(input) || !input) {
+                console.log ("Please enter an office number.");
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'list',
@@ -40,22 +72,54 @@ const engineerQuestions = [
         type: 'input',
         name: 'name',
         message: "What is the engineers's name?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter a name.");
+                return false;
+            }
+        }
 
     },
     {
         type: 'input',
         name: 'id',
         message: "What is the engineer's employee ID?",
+        validate: input => {
+            if (isNaN(input) || !input) {
+                console.log ("Please enter an ID number.");
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'input',
         name: 'email',
         message: "What is the engineer's email?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter an email.");
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'github',
         message: "What is the engineer's GitHub username?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter a username.");
+                return false;
+            }
+        }
     },
     {
         type: 'list',
@@ -69,22 +133,54 @@ const internQuestions = [
         type: 'input',
         name: 'name',
         message: "What is the intern's name?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter a name.");
+                return false;
+            }
+        }
 
     },
     {
         type: 'input',
         name: 'id',
         message: "What is the intern's employee ID?",
+        validate: input => {
+            if (isNaN(input) || !input) {
+                console.log ("Please enter an ID number.");
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'input',
         name: 'email',
         message: "What is the intern's email?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter an email.");
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'school',
-        message: "What is the intern's school??",
+        message: "What is the intern's school?",
+        validate: input => {
+            if (input) {
+                return true;
+            } else {
+                console.log ("Please enter a school.");
+                return false;
+            }
+        }
     },
     {
         type: 'list',
@@ -100,7 +196,6 @@ function writeToFile(fileName, response) {
     )
 }
 function endQuestions(emptyArray) {
-    
     writeToFile("./dist/index.html", generateHTML(emptyArray))
 }
 
@@ -117,14 +212,10 @@ function init() {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else 
-            endQuestions()
+            } else {endQuestions()}
+            
         })
-        // .then(response => {
-        //     const { name, id, email, office } = response
-        //     const manager = new Manager (name, id, email, office);
-        //     emptyArray.push(manager);
-        // })
+    
 }
 function engineer() {
     inquirer
@@ -138,13 +229,9 @@ function engineer() {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else endQuestions()
+            } else {endQuestions()}
         })
-        // .then(response => {
-        //     const { name, id, email, github } = response
-        //     const engineer = new Engineer (name, id, email, github)
-        //     emptyArray.push(engineer);
-        // })
+      
 
 }
 function intern() {
@@ -160,12 +247,7 @@ function intern() {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
-            } else endQuestions()
+            } else {endQuestions()}
         })
-        // .then(response => {
-        //     const { name, id, email, school } = response
-        //     const intern = new Intern (name, id, email, school)
-        //     emptyArray.push(intern)
-        // })
 }
 init();
