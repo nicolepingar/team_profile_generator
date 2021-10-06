@@ -58,15 +58,15 @@ const generateHTML = function (employeeArray) {
   for (let i = 0; i < employeeArray.length; i++) { // loop so multiple cards can be added
     const employee = employeeArray[i];
     // conditional based on role so cards can be pushed on to empty array
-    if (employee.role === "Manager") { 
+    if (employee.getRole() === "Manager") { 
       const managerCard = generateManager(employee);
       cardArray.push(managerCard);
     }
-    if (employee.role === "Engineer") {
+    if (employee.getRole() === "Engineer") {
       const engineerCard = generateEngineer(employee);
       cardArray.push(engineerCard)
     }
-    if (employee.role === "Intern") {
+    if (employee.getRole() === "Intern") {
       const internCard = generateIntern(employee);
       cardArray.push(internCard)
     }
@@ -93,7 +93,7 @@ const bodyHTML = function (teamCards) {
 
 <body>
 
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1"><i class="fas fa-users"></i> Team Profile</span>
   </div>

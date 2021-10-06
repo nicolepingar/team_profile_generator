@@ -188,16 +188,18 @@ const internQuestions = [
         choices: ["Engineer", "Intern", "I dont want to add any more team members."]
     }
 ]
-
+// writeFile takes in a fileName and data
 function writeToFile(fileName, response) {
+    // if there is an error, alert the user, if not show console.log message
     fs.writeFile(fileName, response, (err) =>
     err ? console.error(err) : console.log("Generating your team profile...")
     )
 }
+// writeFile will create a file called "index.html" and take in generateHTML(emptyArray) as data
 function endQuestions(emptyArray) {
     writeToFile("./dist/index.html", generateHTML(emptyArray))
 }
-
+// function is initialized when "node index.js" is ran
 function init() {
     console.log("Please build your team.");
     inquirer
