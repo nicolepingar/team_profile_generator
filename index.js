@@ -206,8 +206,8 @@ function init() {
         .prompt(managerQuestions) // questions are passed through
         .then((response) => {
             const { name, id, email, office } = response // responses create a new manager and are added on to empty array
-            const manager = new Manager (name, id, email, office);
-            emptyArray.push(manager);
+            const managerVar = new Manager (name, id, email, office);
+            emptyArray.push(managerVar);
             if (response.new === "Engineer") { // if the user picks engineer, call engineer questions 
                 engineer(); 
             } else if (response.new === "Intern") { // if the user picks intern, call intern questions
@@ -220,8 +220,8 @@ function engineer() {
         .prompt(engineerQuestions)
         .then((response) => {
             const { name, id, email, github } = response
-            const engineer = new Engineer (name, id, email, github)
-            emptyArray.push(engineer);
+            const engineerVar = new Engineer (name, id, email, github)
+            emptyArray.push(engineerVar);
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
@@ -234,8 +234,8 @@ function intern() {
         .prompt(internQuestions)
         .then((response) => {
             const { name, id, email, school } = response
-            const intern = new Intern (name, id, email, school)
-            emptyArray.push(intern)
+            const internVar = new Intern (name, id, email, school)
+            emptyArray.push(internVar)
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
