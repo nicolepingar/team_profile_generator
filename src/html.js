@@ -2,8 +2,8 @@
 const generateManager = function (manager) {
   return `
     <div class="col">
-    <div class="card" style="width: 18rem;">
-  <div class="card-body">
+    <div class="card mx-2" style="width: 18rem;">
+  <div class="card-body text-white bg-dark">
     <h5 class="card-title">${manager.name}</h5>
     <p class="card-text"><i class="fas fa-thumbtack"></i> ${manager.getRole()}</p>
   </div>
@@ -20,8 +20,8 @@ const generateManager = function (manager) {
 const generateEngineer = function (engineer) {
   return `
     <div class="col">
-    <div class="card" style="width: 18rem;">
-  <div class="card-body">
+    <div class="card mx-2" style="width: 18rem;">
+  <div class="card-body text-white bg-dark">
     <h5 class="card-title">${engineer.name}</h5>
     <p class="card-text"><i class="fas fa-laptop-code"></i> ${engineer.getRole()}</p>
   </div>
@@ -38,15 +38,15 @@ const generateEngineer = function (engineer) {
 const generateIntern = function (intern) {
   return `
     <div class="col">
-    <div class="card" style="width: 18rem;">
-  <div class="card-body">
+    <div class="card mx-2" style="width: 18rem;">
+  <div class="card-body text-white bg-dark">
     <h5 class="card-title">${intern.name}</h5>
     <p class="card-text"><i class="fas fa-graduation-cap"></i> ${intern.getRole()}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${intern.id}</li>
     <li class="list-group-item"> Email:  <a href="mailto:${intern.email}">${intern.email}</a></li>
-    <li class="list-group-item">Office Number: ${intern.school}</li>
+    <li class="list-group-item">School: ${intern.school}</li>
   </ul>
 </div>
 </div>
@@ -100,7 +100,7 @@ const bodyHTML = function (teamCards) {
 </nav>
 
 <main>
-<div class="container">
+<div class="container my-3">
   <div class="row justify-content-center">
    
 ${teamCards}

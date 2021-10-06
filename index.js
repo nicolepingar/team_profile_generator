@@ -203,20 +203,17 @@ function endQuestions(emptyArray) {
 function init() {
     console.log("Please build your team.");
     inquirer
-        .prompt(managerQuestions)
+        .prompt(managerQuestions) // questions are passed through
         .then((response) => {
-            const { name, id, email, office } = response
+            const { name, id, email, office } = response // responses create a new manager and are added on to empty array
             const manager = new Manager (name, id, email, office);
             emptyArray.push(manager);
-
-            if (response.new === "Engineer") {
-                engineer();
-            } else if (response.new === "Intern") {
+            if (response.new === "Engineer") { // if the user picks engineer, call engineer questions 
+                engineer(); 
+            } else if (response.new === "Intern") { // if the user picks intern, call intern questions
                 intern();
-            } else {endQuestions(emptyArray)}
-            
+            } else {endQuestions(emptyArray)} // if the user picks "I dont want to add any more team members." call end questions with array of responses
         })
-    
 }
 function engineer() {
     inquirer
@@ -225,15 +222,12 @@ function engineer() {
             const { name, id, email, github } = response
             const engineer = new Engineer (name, id, email, github)
             emptyArray.push(engineer);
-
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
                 intern();
             } else {endQuestions(emptyArray)}
         })
-      
-
 }
 function intern() {
     inquirer
@@ -242,8 +236,6 @@ function intern() {
             const { name, id, email, school } = response
             const intern = new Intern (name, id, email, school)
             emptyArray.push(intern)
-
-
             if (response.new === "Engineer") {
                 engineer();
             } else if (response.new === "Intern") {
